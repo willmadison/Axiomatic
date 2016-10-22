@@ -20,16 +20,34 @@ class SimpleValueConditionTest {
 
     @Test
     fun evaluateCondition_equals() {
-        var condition = SimpleValueCondition(JXPathReader("items[sku='dummySku']/quantity"), Condition.Operator.EQUALS)
+        val condition = SimpleValueCondition(JXPathReader("items[sku='dummySku']/quantity"), Condition.Operator.EQUALS)
         condition.value = 5.0
         assertTrue(condition.evaluateCondition(exampleCart()))
     }
 
     @Test
     fun evaluateCondition_strictlyGreater() {
-        var condition = SimpleValueCondition(JXPathReader("items[sku='dummySku']/quantity"), Condition.Operator.GREATER_THAN)
+        val condition = SimpleValueCondition(JXPathReader("items[sku='dummySku']/quantity"), Condition.Operator.GREATER_THAN)
         condition.value = 1.0
         assertTrue(condition.evaluateCondition(exampleCart()))
+    }
+
+    @Test
+    fun evaluateCondition_strictlyLess() {
+        val condition = SimpleValueCondition(JXPathReader("items[sku='dummySku']/quantity"), Condition.Operator.LESS_THAN)
+        condition.value = 100.0
+        assertTrue(condition.evaluateCondition(exampleCart()))
+    }
+
+    @Test
+    fun evaluateCondition_contains() {
+        var condition = SimpleValueCondition(JXPathReader("promotions"), Condition.Operator.CONTAINS)
+        condition.value = "promotion1"
+        assertTrue(condition.evaluateCondition(exampleCart()))
+
+        condition = SimpleValueCondition(JXPathReader("promotions"), Condition.Operator.CONTAINS)
+        condition.value = "promotion70"
+        assertFalse(condition.evaluateCondition(exampleCart()))
     }
 
 }

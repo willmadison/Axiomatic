@@ -1,6 +1,7 @@
 package com.willmadison.discounts
 
 import com.willmadison.rules.buyNRule
+import com.willmadison.store.Cart
 import com.willmadison.store.exampleCart
 import org.junit.Assert.*
 import org.junit.Test
@@ -17,5 +18,6 @@ class DiscountTest {
         assertFalse(noRule.isApplicable(cart))
         assertTrue(buy1Get1.isApplicable(cart))
         assertFalse(buy7Get1.isApplicable(cart))
+        assertFalse(buy7Get1.isApplicable(Cart()))
     }
 }
