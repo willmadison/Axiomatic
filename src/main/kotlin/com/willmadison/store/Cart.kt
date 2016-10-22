@@ -1,6 +1,8 @@
 package com.willmadison.store
 
-data class Cart(val items: Set<CartItem> = emptySet(), val promotions: Set<String> = emptySet())
+import java.util.*
+
+data class Cart(val items: Set<CartItem> = emptySet(), val promotions: Set<String> = emptySet(), val id: String = UUID.randomUUID().toString())
 
 fun exampleCart() : Cart {
     return Cart(items = setOf(

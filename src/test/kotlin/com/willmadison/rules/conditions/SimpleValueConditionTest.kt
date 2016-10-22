@@ -50,4 +50,11 @@ class SimpleValueConditionTest {
         assertFalse(condition.evaluateCondition(exampleCart()))
     }
 
+    @Test
+    fun evaluateCondition_containsForNonCollection() {
+        var condition = SimpleValueCondition(JXPathReader("id"), Condition.Operator.CONTAINS)
+        condition.value = "promotion1"
+        assertFalse(condition.evaluateCondition(exampleCart()))
+    }
+
 }
