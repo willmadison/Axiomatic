@@ -19,7 +19,6 @@ abstract class Condition : RuleElement {
         EXISTS("exists"),
         LESS_THAN("<"),
         GREATER_THAN(">"),
-        IN("in"),
         CONTAINS("contains");
 
         override fun toString(): String {

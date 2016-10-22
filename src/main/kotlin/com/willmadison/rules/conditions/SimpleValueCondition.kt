@@ -22,17 +22,25 @@ class SimpleValueCondition(var reader: Reader, val operator: Operator = Operator
             Operator.EXISTS -> {
                 return reader.read(o) != null
             }
-            Operator.LESS_THAN -> TODO()
-            Operator.GREATER_THAN -> {
+            Operator.GREATER_THAN, Operator.LESS_THAN -> {
                 return if (value != null && reader.read(o) != null) {
                     compare(reader.read(o)!!, value as Any, operator)
                 } else {
                     false
                 }
             }
-            Operator.IN -> TODO()
-            Operator.CONTAINS -> TODO()
+            Operator.CONTAINS -> {
+                return if (value != null && reader.read(o) != null && reader.read(o) is Collection<*>) {
+                    contains(reader.read(o)!! as Collection<*>, value as Any)
+                } else {
+                    false
+                }
+            }
         }
+    }
+
+    private fun contains(collection: Collection<*>, needle: Any): Boolean {
+        return collection.contains(needle)
     }
 
     private fun compare(left: Any, right: Any, operator: Operator): Boolean {
