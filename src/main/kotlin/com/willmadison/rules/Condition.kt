@@ -19,8 +19,6 @@ abstract class Condition : RuleElement {
         EXISTS("exists"),
         LESS_THAN("<"),
         GREATER_THAN(">"),
-        LESS_THAN_EQ("<="),
-        GREATER_THAN_EQ(">="),
         IN("in"),
         CONTAINS("contains");
 

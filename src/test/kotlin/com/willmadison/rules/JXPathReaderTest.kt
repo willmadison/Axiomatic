@@ -40,4 +40,10 @@ class JXPathReaderTest {
         assertNull(reader.read(exampleCart()))
     }
 
+    @Test
+    fun read_numericValue() {
+        var reader = JXPathReader(path = "items[sku='dummySku' and quantity >= 1.0]/quantity")
+        assertEquals(5.0, reader.read(exampleCart()))
+    }
+
 }
