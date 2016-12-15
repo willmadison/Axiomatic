@@ -24,14 +24,14 @@ class SimpleValueCondition(var reader: Reader, val operator: Operator = Operator
             }
             Operator.GREATER_THAN, Operator.LESS_THAN -> {
                 return if (value != null && reader.read(o) != null) {
-                    compare(reader.read(o)!!, value as Any, operator)
+                    compare(reader.read(o), value as Any, operator)
                 } else {
                     false
                 }
             }
             Operator.CONTAINS -> {
                 return if (value != null && reader.read(o) != null && reader.read(o) is Collection<*>) {
-                    contains(reader.read(o)!! as Collection<*>, value as Any)
+                    contains(reader.read(o) as Collection<*>, value as Any)
                 } else {
                     false
                 }
@@ -43,7 +43,7 @@ class SimpleValueCondition(var reader: Reader, val operator: Operator = Operator
         return collection.contains(needle)
     }
 
-    private fun compare(left: Any, right: Any, operator: Operator): Boolean {
+    private fun compare(left: Any?, right: Any, operator: Operator): Boolean {
         return if (left is Comparable<*> && right is Comparable<*>) {
             when {
                 left is String && right is String -> {
